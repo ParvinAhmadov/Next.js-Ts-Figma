@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
+import { generateClamp } from "@/utils/clamp";
 
 type Step = "login" | "register1" | "register2";
 
@@ -51,7 +52,7 @@ export default function AuthCard() {
   return (
     <div className="w-full max-w-md mx-auto">
       <div
-        className="h-[543px] w-[430px] rounded-[7px] overflow-hidden bg-white shadow-lg"
+        className="sm:w-[380px] lg:w-[430px] h-[543px] rounded-[7px] overflow-hidden bg-white shadow-lg  "
         style={{ perspective: 1000 }}
       >
         <AnimatePresence mode="wait">
@@ -81,7 +82,13 @@ export default function AuthCard() {
                   />
                 </div>
 
-                <h2 className="text-[20px] text-[#103557] font-semibold mt-4">
+                <h2
+                  style={{
+                    fontSize: generateClamp(18, 22),
+                    lineHeight: generateClamp(22, 28),
+                  }}
+                  className="text-[#103557] font-semibold mt-4"
+                >
                   Welcome Searchart !
                 </h2>
               </div>
@@ -110,15 +117,25 @@ export default function AuthCard() {
                 </a>
               </div>
 
-              <button className="w-full h-[50px] bg-[#103557] text-white rounded-[7px] text-[20px] font-semibold">
+              <button
+                style={{
+                  fontSize: generateClamp(16, 20),
+                }}
+                className="w-full h-[50px] bg-[#103557] text-white rounded-[7px] font-semibold"
+              >
                 Sign in
               </button>
 
-              <p className="text-[12px] text-[#515151] text-center mt-6 font-normal">
+              <p
+                style={{
+                  fontSize: generateClamp(10, 14),
+                }}
+                className="text-[#515151] text-center mt-6"
+              >
                 Not registered yet?{" "}
                 <button
                   onClick={() => setStep("register1")}
-                  className="text-[#103557] text-[12px]  font-normal hover:underline "
+                  className="text-[#103557] hover:underline"
                 >
                   Create an account
                 </button>
@@ -137,47 +154,70 @@ export default function AuthCard() {
             >
               <div>
                 <div className="flex items-center justify-center">
-                  <h2 className="text-[20px] font-semibold mb-6 text-[#103557]">
+                  <h2
+                    className="text-[#103557] font-semibold mb-6"
+                    style={{
+                      fontSize: generateClamp(18, 22),
+                      lineHeight: generateClamp(22, 28),
+                    }}
+                  >
                     Registration
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-3">
                   <div>
-                    <label className="block text-[14px] font-normal text-[#727272] mb-1">
+                    <label
+                      className="block font-normal text-[#727272] mb-1"
+                      style={{ fontSize: generateClamp(13, 16) }}
+                    >
                       First Name
                     </label>
                     <input
                       type="text"
-                      className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-4"
+                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
+                      style={{ fontSize: generateClamp(14, 16) }}
                     />
                   </div>
                   <div>
-                    <label className="block text-[14px] font-normal text-[#727272] mb-1">
+                    <label
+                      className="block font-normal text-[#727272] mb-1"
+                      style={{ fontSize: generateClamp(13, 16) }}
+                    >
                       Last Name
                     </label>
                     <input
                       type="text"
-                      placeholder="Enter your last name"
-                      className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-4"
+                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
+                      style={{ fontSize: generateClamp(14, 16) }}
                     />
                   </div>
                 </div>
 
-                <label className="block text-[14px] font-normal text-[#727272] mb-1">
+                <label
+                  className="block font-normal text-[#727272] mb-1"
+                  style={{ fontSize: generateClamp(13, 16) }}
+                >
                   Gender
                 </label>
                 <input
                   type="text"
-                  className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-1"
-                ></input>
+                  className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-1"
+                  style={{ fontSize: generateClamp(14, 16) }}
+                />
 
-                <label className="block text-[14px] font-normal text-[#727272] ">
+                <label
+                  className="block font-normal text-[#727272]"
+                  style={{ fontSize: generateClamp(13, 16) }}
+                >
                   Phone Number
                 </label>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-gray-100 border border-gray-300 rounded-[7px] min-w-[90px]">
-                    <span className="text-sm font-medium text-[#515151]">
+                    <span
+                      className="font-medium text-[#515151]"
+                      style={{ fontSize: generateClamp(12, 14) }}
+                    >
                       +994
                     </span>
 
@@ -192,27 +232,36 @@ export default function AuthCard() {
 
                   <input
                     type="tel"
-                    className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] "
+                    className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB]"
+                    style={{ fontSize: generateClamp(14, 16) }}
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="block text-[14px] font-normal text-[#727272] mb-1">
+                    <label
+                      className="block font-normal text-[#727272] mb-1"
+                      style={{ fontSize: generateClamp(13, 16) }}
+                    >
                       Company
                     </label>
                     <input
                       type="text"
-                      className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-4"
+                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
+                      style={{ fontSize: generateClamp(14, 16) }}
                     />
                   </div>
                   <div>
-                    <label className="block text-[14px] font-normal text-[#727272] mb-1">
+                    <label
+                      className="block font-normal text-[#727272] mb-1"
+                      style={{ fontSize: generateClamp(13, 16) }}
+                    >
                       Industry
                     </label>
                     <input
                       type="text"
-                      className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-4"
+                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
+                      style={{ fontSize: generateClamp(14, 16) }}
                     />
                   </div>
                 </div>
@@ -221,7 +270,11 @@ export default function AuthCard() {
               <div>
                 <button
                   onClick={handleNext}
-                  className="w-full h-[50px] bg-[#103557] text-white rounded-[7px] text-[16px] font-medium text-[20px] flex items-center justify-center group transition-all duration-300 mb-1"
+                  className="w-full h-[50px] bg-[#103557] text-white rounded-[7px] flex items-center justify-center group transition-all duration-300 mb-1"
+                  style={{
+                    fontSize: generateClamp(16, 20),
+                    lineHeight: generateClamp(20, 24),
+                  }}
                 >
                   <span className="mr-2">Next</span>
                   <FiArrowRight
@@ -230,11 +283,15 @@ export default function AuthCard() {
                   />
                 </button>
 
-                <p className="text-[10px] text-center  text-[#515151]">
+                <p
+                  className="text-center text-[#515151]"
+                  style={{ fontSize: generateClamp(10, 12) }}
+                >
                   Already have an account?{" "}
                   <button
                     onClick={handleBackToLogin}
-                    className="text-[10px] text-center  text-[#103557] hover:underline"
+                    className="text-[#103557] hover:underline"
+                    style={{ fontSize: generateClamp(10, 12) }}
                   >
                     Log in
                   </button>

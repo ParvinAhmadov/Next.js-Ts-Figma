@@ -27,13 +27,14 @@ const Header = ({ isTransparent = false, className = "" }: HeaderProps) => {
   const [isPolicyOpen, setPolicyOpen] = useState(false);
   const headerClasses = `
     fixed top-0 left-0 w-full z-50 text-white transition-colors duration-300
-    ${isTransparent ? "bg-transparent" : "bg-[#001228] "} 
+    ${isTransparent ? "bg-transparent" : "bg-[linear-gradient(#111F35,#1A2A4D)] "} 
     ${className}
   `;
   return (
     <header className={headerClasses}>
       <div className="max-w-[960px] mx-auto py-4 px-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
+          <div className="p-2  bg-[linear-gradient(#111F35,#04070B)] rounded-full">
           <Image
             src="/images/Frame 1.png"
             alt="Search Icon"
@@ -41,6 +42,7 @@ const Header = ({ isTransparent = false, className = "" }: HeaderProps) => {
             height={24}
             className="object-contain"
           />
+          </div>
           <span
             style={{ fontSize: generateClamp(16, 22) }}
             className="font-bold"

@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col min-h-screen">
       <Header isTransparent={isAccountPage} />
 
-      <main className={`flex-1 w-full ${isAccountPage ? "" : "pt-24"}`}>
+      <main className={`flex-1 w-full `}>
         {children}
       </main>
 

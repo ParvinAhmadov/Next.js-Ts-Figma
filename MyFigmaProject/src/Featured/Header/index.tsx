@@ -4,44 +4,95 @@ import { generateClamp } from "@/utils/clamp";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  MdMilitaryTech,
-  MdAttachMoney,
-  MdAgriculture,
-  MdAccountBalance,
-  MdHealthAndSafety,
-  MdGroups,
-  MdAssessment,
-  MdBusinessCenter,
-  MdLightbulb,
-  MdDirectionsTransit,
-  MdSchool,
-  MdMoreHoriz,
-} from "react-icons/md";
+
 interface HeaderProps {
   isTransparent?: boolean;
   className?: string;
+  maxWidth?: number;
 }
-const Header = ({ isTransparent = false, className = "" }: HeaderProps) => {
+
+const Header = ({ isTransparent = false, maxWidth }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPolicyOpen, setPolicyOpen] = useState(false);
-  const headerClasses = `
-    fixed top-0 left-0 w-full z-50 text-white transition-colors duration-300
-    ${isTransparent ? "bg-transparent" : "bg-[linear-gradient(#111F35,#1A2A4D)] "} 
-    ${className}
-  `;
+
+  const navItems = [
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/army-21ca5922.svg",
+      label: "Army",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/economy-dfafea10.svg",
+      label: "Economy",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/agriculture-d628415c.svg",
+      label: "Agriculture",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/government-b36df543.svg",
+      label: "Government",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/health-774655ad.svg",
+      label: "Health",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/social-7a0c420a.svg",
+      label: "Social",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/index-70b5fb66.svg",
+      label: "Index",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/business-968f7934.svg",
+      label: "Business",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/technology-c006b058.svg",
+      label: "Technology & Innovation",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/transportation-4254f6cb.svg",
+      label: "Transportation",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/education-e2cf907b.svg",
+      label: "Education",
+    },
+    {
+      src: "https://searchartfront-production.up.railway.app/assets/others-8a424bbf.svg",
+      label: "Other",
+    },
+  ];
   return (
-    <header className={headerClasses}>
-      <div className="max-w-[960px] mx-auto py-4 px-4 flex items-center justify-between">
+    <header
+      className={`
+        fixed top-0 left-1/2 z-50 text-white transition-colors duration-300
+        ${
+          isTransparent
+            ? "bg-transparent"
+            : "bg-[linear-gradient(rgba(17,31,53,0.95)]"
+        }
+      `}
+      style={{
+        width: maxWidth ? `${maxWidth}px` : "100%",
+        transform: "translateX(-50%)",
+      }}
+    >
+      <div
+        className="mx-auto flex items-center justify-between py-4 px-4"
+        style={{ maxWidth: generateClamp(960, 1440), width: "100%" }}
+      >
         <div className="flex items-center gap-2">
           <div className="p-2  bg-[linear-gradient(#111F35,#04070B)] rounded-full">
-          <Image
-            src="/images/Frame 1.png"
-            alt="Search Icon"
-            width={24}
-            height={24}
-            className="object-contain"
-          />
+            <Image
+              src="/images/Frame 1.png"
+              alt="Search Icon"
+              width={24}
+              height={24}
+              className="object-contain"
+            />
           </div>
           <span
             style={{ fontSize: generateClamp(16, 22) }}
@@ -72,142 +123,27 @@ const Header = ({ isTransparent = false, className = "" }: HeaderProps) => {
                 transition={{ duration: 0.3 }}
                 className="absolute top-full left-0 mt-2 bg-[#001228] shadow-lg rounded-md py-2 z-40 w-64"
               >
-                <nav className="flex flex-col w-[256px] h-[496px] gap-2 text-white p-2">
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/army-21ca5922.svg"
-                      alt="Army"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Army</span>
-                  </a>
-
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/economy-dfafea10.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Economy</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/agriculture-d628415c.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Agriculture</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/government-b36df543.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Government</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/health-774655ad.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Health</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/social-7a0c420a.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Social</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/index-70b5fb66.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Index</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/business-968f7934.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Business</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/technology-c006b058.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">
-                      Technology & Innovation
-                    </span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/transportation-4254f6cb.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Transportation</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/education-e2cf907b.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Education</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
-                  >
-                    <img
-                      src="https://searchartfront-production.up.railway.app/assets/others-8a424bbf.svg"
-                      alt="Economy"
-                      className="w-6 h-6 invert"
-                    />
-                    <span className="text-white text-sm">Other</span>
-                  </a>
+                <nav className="flex flex-col w-[256px] h-[496px] gap-2 text-white p-2 overflow-hidden bg-[#001228] rounded-lg">
+                  {navItems.map((item, i) => (
+                    <a
+                      key={i}
+                      href="#"
+                      className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
+                    >
+                      <div className="w-6 h-6 relative invert">
+                        <Image
+                          src={item.src}
+                          alt={item.label}
+                          fill
+                          sizes="24px"
+                          className="object-contain"
+                        />
+                      </div>
+                      <span className="text-white text-sm whitespace-nowrap">
+                        {item.label}
+                      </span>
+                    </a>
+                  ))}
                 </nav>
               </motion.div>
             )}

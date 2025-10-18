@@ -12,3 +12,9 @@ export function generateClamp(
     4
   )}px), ${max}px)`;
 }
+
+export const generateClampInfo = (min: number, max: number): string => {
+  return `clamp(${min}px, ${(min + max) / 2}px, ${max}px)`;
+};
+
+

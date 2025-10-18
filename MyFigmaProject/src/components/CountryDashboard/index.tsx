@@ -36,10 +36,10 @@ const MotionSlider: React.FC = () => {
     setIndex((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="w-full bg-white dark:bg-[#0F1C2E] text-gray-900 dark:text-white transition-colors duration-500 relative">
+    <section className="w-full bg-white dark:bg-[#182235] text-gray-900 dark:text-white transition-colors duration-500 relative">
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition z-20"
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center border border-gray-400 text-gray-300 hover:text-white hover:border-white rounded-full bg-transparent transition z-20"
       >
         ←
       </button>
@@ -52,33 +52,47 @@ const MotionSlider: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center space-y-6"
+            className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10"
           >
-            <h2
-              className="font-bold"
-              style={{ fontSize: generateClamp(20, 36) }}
-            >
-              {slides[index].title}
-            </h2>
+            <div className="flex-1 text-left space-y-6">
+              <h2
+                className="font-bold text-[#FF3C00]"
+                style={{ fontSize: generateClamp(20, 36) }}
+              >
+                {slides[index].title}
+              </h2>
 
-            <p
-              className="text-gray-700 dark:text-gray-300"
-              style={{
-                fontSize: generateClamp(14, 20),
-                lineHeight: "1.6",
-                maxWidth: "60ch",
-                margin: "0 auto",
-              }}
-            >
-              {slides[index].text}
-            </p>
+              <p
+                className="text-gray-300"
+                style={{
+                  fontSize: generateClamp(14, 20),
+                  lineHeight: "1.6",
+                  maxWidth: "60ch",
+                }}
+              >
+                {slides[index].text}
+              </p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="pt-4"
+              >
+                <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#1E2A3A] text-white rounded-full font-medium hover:bg-[#2A3C50] transition">
+                  More
+                  <span className="text-xl">→</span>
+                </button>
+              </motion.div>
+            </div>
 
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative w-full max-w-3xl h-[400px] mx-auto rounded-xl overflow-hidden shadow-lg mt-10"
+              className="flex-1 relative w-full max-w-[500px] h-[400px] rounded-xl overflow-hidden shadow-lg"
             >
               <Image
                 src={slides[index].image}
@@ -87,25 +101,12 @@ const MotionSlider: React.FC = () => {
                 className="object-cover"
               />
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="mt-6 flex justify-end"
-            >
-              <button className="flex items-center gap-2 text-[#FF3C00] font-semibold hover:underline transition">
-                More
-                <span className="text-xl">→</span>
-              </button>
-            </motion.div>
           </motion.div>
         </AnimatePresence>
       </div>
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition z-20"
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center border border-gray-400 rounded-full text-gray-300 hover:text-white hover:border-white transition z-20 bg-transparent"
       >
         →
       </button>

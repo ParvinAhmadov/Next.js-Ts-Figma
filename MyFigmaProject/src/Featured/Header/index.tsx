@@ -8,10 +8,10 @@ import { AnimatePresence, motion } from "framer-motion";
 interface HeaderProps {
   isTransparent?: boolean;
   className?: string;
-  maxWidth?: number;
+  containerMaxWidth?: number;
 }
 
-const Header = ({ isTransparent = false, maxWidth }: HeaderProps) => {
+const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPolicyOpen, setPolicyOpen] = useState(false);
 
@@ -67,22 +67,13 @@ const Header = ({ isTransparent = false, maxWidth }: HeaderProps) => {
   ];
   return (
     <header
-      className={`
-        fixed top-0 left-1/2 z-50 text-white transition-colors duration-300
-        ${
-          isTransparent
-            ? "bg-transparent"
-            : "bg-[linear-gradient(rgba(17,31,53,0.95)]"
-        }
-      `}
-      style={{
-        width: maxWidth ? `${maxWidth}px` : "100%",
-        transform: "translateX(-50%)",
-      }}
+      className={`fixed top-0 left-0 z-50 w-full text-white transition-colors duration-300 ${
+        isTransparent ? "bg-transparent" : "bg-[#101D31]"
+      }`}
     >
       <div
-        className="mx-auto flex items-center justify-between py-4 px-4"
-        style={{ maxWidth: generateClamp(960, 1440), width: "100%" }}
+        className="flex items-center justify-between py-4 px-4 mx-auto"
+        style={{ maxWidth: `${containerMaxWidth}px` }}
       >
         <div className="flex items-center gap-2">
           <div className="p-2  bg-[linear-gradient(#111F35,#04070B)] rounded-full">

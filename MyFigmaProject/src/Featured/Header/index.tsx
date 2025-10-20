@@ -4,6 +4,8 @@ import { generateClamp } from "@/utils/clamp";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
+import { CiDark, CiLight } from "react-icons/ci";
+import { useTheme } from "@/context";
 
 interface HeaderProps {
   isTransparent?: boolean;
@@ -14,6 +16,8 @@ interface HeaderProps {
 const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPolicyOpen, setPolicyOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
 
   const navItems = [
     {
@@ -67,8 +71,12 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
   ];
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full text-white transition-colors duration-300 ${
-        isTransparent ? "bg-transparent" : "bg-[#101D31]"
+      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+        isTransparent
+          ? "bg-transparent text-white" // Şəffaf olduğu zaman həmişə text-white
+          : theme === "dark"
+          ? "bg-[#101D31] text-white" // Dark mode
+          : "bg-white text-black" // Light mode
       }`}
     >
       <div
@@ -96,7 +104,9 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
         <nav className="hidden relative  lg:flex items-center gap-5">
           <a
             href="#"
-            className="hover:underline"
+            className={`hover:underline ${
+              theme === "dark" ? "text-white" : "text-black"
+            }`}
             style={{ fontSize: generateClamp(14, 16) }}
             onClick={(e) => {
               e.preventDefault();
@@ -105,6 +115,7 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
           >
             Policy area
           </a>
+
           <AnimatePresence>
             {isPolicyOpen && (
               <motion.div
@@ -112,25 +123,37 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute top-full left-0 mt-2 bg-[#001228] shadow-lg rounded-md py-2 z-40 w-64"
+                className={`absolute top-full left-0 mt-2 shadow-lg rounded-md py-2 z-40 w-64 ${
+                  theme === "dark" ? "bg-[#111F35]" : "bg-white"
+                }`}
               >
-                <nav className="flex flex-col w-[256px] h-[496px] gap-2 text-white p-2 overflow-hidden bg-[#001228] rounded-lg">
+                <nav
+                  className={`flex flex-col w-[256px] h-[496px] gap-2 p-2 overflow-hidden rounded-lg  ${
+                    theme === "dark" ? "text-white" : "text-black"
+                  }`}
+                >
                   {navItems.map((item, i) => (
                     <a
                       key={i}
                       href="#"
-                      className="flex items-center w-[240px] h-[40px] px-2 gap-3 rounded hover:bg-gray-800 transition-colors duration-300"
+                      className={`flex items-center w-[240px] h-[40px] px-2 gap-3 rounded transition-colors duration-300 ${
+                        theme === "dark"
+                          ? "hover:bg-gray-700 text-white"
+                          : "hover:bg-gray-200 text-black"
+                      }`}
                     >
-                      <div className="w-6 h-6 relative invert">
+                      <div className="w-6 h-6 relative">
                         <Image
                           src={item.src}
                           alt={item.label}
-                          fill
-                          sizes="24px"
-                          className="object-contain"
+                          width={24}
+                          height={24}
+                          className={`object-contain ${
+                            theme === "dark" ? "invert" : ""
+                          }`}
                         />
                       </div>
-                      <span className="text-white text-sm whitespace-nowrap">
+                      <span className="text-sm whitespace-nowrap">
                         {item.label}
                       </span>
                     </a>
@@ -161,6 +184,12 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
           >
             About Us
           </a>
+          <div
+            className="flex items-center justify-center border p-2 rounded cursor-pointer"
+            onClick={toggleTheme}
+          >
+            {theme === "dark" ? <CiLight size={20} /> : <CiDark size={20} />}
+          </div>
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
@@ -173,7 +202,11 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
           </a>
           <a
             href="#"
-            className="px-3 py-1.5 border border-white rounded-[6px] hover:bg-white hover:text-black transition"
+            className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
+              isDark
+                ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#111F35]"
+                : "border-black text-black hover:bg-black hover:text-white"
+            }`}
             style={{ fontSize: generateClamp(14, 16) }}
           >
             Sign up
@@ -194,59 +227,58 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed top-0 right-0 h-full w-64 bg-[#001228] z-50 shadow-lg flex flex-col py-8 px-5"
+            className={`fixed top-0 right-0 h-full w-64 z-50 shadow-lg flex flex-col py-8 px-5 transition-colors duration-300 ${
+              isDark ? "bg-[#001228]" : "bg-white"
+            }`}
           >
             <button
               onClick={() => setIsOpen(false)}
-              className="self-end mb-8 text-white"
+              className={`self-end mb-8 transition-colors duration-300 ${
+                isDark ? "text-white" : "text-[#001228]"
+              }`}
             >
               <FiX size={24} />
             </button>
 
             <nav className="flex flex-col gap-6">
+              {["Policy area", "Dashboard", "Subscription", "About Us"].map(
+                (label, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    className={`transition-colors duration-300 hover:underline ${
+                      isDark ? "text-gray-200" : "text-[#001228]"
+                    }`}
+                    style={{ fontSize: generateClamp(14, 16) }}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {label}
+                  </a>
+                )
+              )}
+
+              {/* Sign in */}
               <a
                 href="#"
-                className="text-white hover:underline"
-                style={{ fontSize: generateClamp(14, 16) }}
-                onClick={() => setIsOpen(false)}
-              >
-                Policy area
-              </a>
-              <a
-                href="#"
-                className="text-white hover:underline"
-                style={{ fontSize: generateClamp(14, 16) }}
-                onClick={() => setIsOpen(false)}
-              >
-                Dashboard
-              </a>
-              <a
-                href="#"
-                className="text-white hover:underline"
-                style={{ fontSize: generateClamp(14, 16) }}
-                onClick={() => setIsOpen(false)}
-              >
-                Subscription
-              </a>
-              <a
-                href="#"
-                className="text-white hover:underline"
-                style={{ fontSize: generateClamp(14, 16) }}
-                onClick={() => setIsOpen(false)}
-              >
-                About Us
-              </a>
-              <a
-                href="#"
-                className="px-3 py-1.5 border border-[#001228] bg-white rounded-[6px] text-[#001228] hover:bg-white hover:text-black transition text-center"
+                className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
+                  isDark
+                    ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#001228]"
+                    : "border-[#001228] text-[#001228] hover:bg-[#001228] hover:text-white"
+                }`}
                 style={{ fontSize: generateClamp(14, 16) }}
                 onClick={() => setIsOpen(false)}
               >
                 Sign in
               </a>
+
+              {/* Sign up */}
               <a
                 href="#"
-                className="px-3 py-1.5 border border-[#001228] bg-white rounded-[6px] text-[#001228] hover:bg-white hover:text-black transition text-center"
+                className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
+                  isDark
+                    ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#001228]"
+                    : "border-[#001228] text-[#001228] hover:bg-[#001228] hover:text-white"
+                }`}
                 style={{ fontSize: generateClamp(14, 16) }}
                 onClick={() => setIsOpen(false)}
               >

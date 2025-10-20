@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import Layout from "@/Featured/Layout";
+import { ThemeProvider } from "@/context";
 
 export const metadata: Metadata = {
   title: "SearchArt",
@@ -9,13 +10,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body>
-        <Layout>{children}</Layout>
+        <ThemeProvider>
+          <Layout>{children}</Layout>
+        </ThemeProvider>
       </body>
     </html>
   );

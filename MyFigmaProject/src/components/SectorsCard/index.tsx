@@ -1,15 +1,11 @@
 "use client";
 
+import { generateClamp } from "@/utils/clamp";
 import React, { useEffect } from "react";
 import Image from "next/image";
 import "aos/dist/aos.css";
 import AOS from "aos";
-
-const generateClamp = (minPx: number, maxPx: number): string => {
-  const min = minPx / 16;
-  const max = maxPx / 16;
-  return `clamp(${min}rem, ${min * 0.5}rem + 2vw, ${max}rem)`;
-};
+import { useTheme } from "@/context";
 
 interface Sector {
   title: string;
@@ -80,22 +76,28 @@ const sectorsCard: Sector[] = [
 ];
 
 const SectorGrid: React.FC = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
   }, []);
-  return (
-    <section className="mx-auto bg-white dark:bg-[#0F1C2E] text-gray-900 dark:text-white transition-colors duration-500">
-      <div className="max-w-[1440px] mx-auto text-center space-y-6 py-16 px-4">
-        <h2 className="font-bold" style={{ fontSize: generateClamp(20, 36) }}>
-          Explore Key Sectors
-        </h2>
 
+  return (
+    <section
+      className={`mx-auto transition-colors duration-500 ${
+        isDark ? "bg-[#09101B] text-white" : "bg-[#FBFBFB] text-gray-900"
+      }`}
+    >
+      <div className="max-w-[1440px] mx-auto text-center space-y-6 py-16 px-4">
         <p
-          className="text-gray-700 dark:text-gray-300"
+          className={`transition-colors duration-500 ${
+            isDark ? "text-gray-300" : "text-gray-700"
+          }`}
           style={{
             fontSize: generateClamp(14, 20),
             lineHeight: "1.6",
-            maxWidth: "60ch",
+            maxWidth: "200ch",
             margin: "0 auto",
           }}
         >
@@ -121,11 +123,17 @@ const SectorGrid: React.FC = () => {
                   />
                 </div>
 
-                <div className="absolute inset-0 rounded-full border-[3px] border-transparent group-hover:border-white transition-all duration-500 group-hover:scale-[1.15]  origin-center"></div>
+                <div
+                  className={`absolute inset-0 rounded-full border-[3px] border-transparent group-hover:scale-[1.15] origin-center transition-all duration-500 ${
+                    isDark
+                      ? "group-hover:border-white"
+                      : "group-hover:border-black"
+                  }`}
+                />
               </div>
 
               <span
-                className="font-semibold text-center text-white"
+                className="font-semibold text-center transition-colors duration-500"
                 style={{ fontSize: generateClamp(12, 16) }}
               >
                 {title}

@@ -11,9 +11,14 @@ interface HeaderProps {
   isTransparent?: boolean;
   className?: string;
   containerMaxWidth?: number;
+  bgColor?: string;
 }
 
-const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
+const Header = ({
+  isTransparent = false,
+  containerMaxWidth,
+  bgColor,
+}: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPolicyOpen, setPolicyOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -71,14 +76,16 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
   ];
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
-        isTransparent
-          ? "bg-transparent text-white" // Şəffaf olduğu zaman həmişə text-white
-          : theme === "dark"
-          ? "bg-[#101D31] text-white" // Dark mode
-          : "bg-white text-black" // Light mode
-      }`}
-    >
+    className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+      isTransparent
+        ? "bg-transparent text-white"
+        : bgColor
+        ? `${bgColor} ${isDark ? "text-white" : "text-black"}`
+        : isDark
+        ? "bg-[#101D31] text-white"
+        : "bg-white text-black"
+    }`}
+  >
       <div
         className="flex items-center justify-between py-4 px-4 mx-auto"
         style={{ maxWidth: `${containerMaxWidth}px` }}
@@ -164,7 +171,7 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
           </AnimatePresence>
 
           <a
-            href="#"
+            href="/dashboard"
             className="hover:underline"
             style={{ fontSize: generateClamp(14, 16) }}
           >
@@ -257,7 +264,6 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
                 )
               )}
 
-              {/* Sign in */}
               <a
                 href="#"
                 className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
@@ -271,7 +277,6 @@ const Header = ({ isTransparent = false, containerMaxWidth }: HeaderProps) => {
                 Sign in
               </a>
 
-              {/* Sign up */}
               <a
                 href="#"
                 className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${

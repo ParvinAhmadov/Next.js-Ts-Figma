@@ -31,7 +31,7 @@ const slides: Slide[] = [
   },
 ];
 
-const MotionSlider: React.FC = () => {
+const CountryDashboard: React.FC = () => {
   const [index, setIndex] = useState(0);
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -198,4 +198,4 @@ const MotionSlider: React.FC = () => {
   );
 };
 
-export default MotionSlider;
+export default CountryDashboard;

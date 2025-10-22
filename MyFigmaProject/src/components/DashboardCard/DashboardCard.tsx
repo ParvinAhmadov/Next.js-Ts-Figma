@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -29,23 +31,20 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
     <div
       onClick={onClick}
       className={`flex flex-col items-center gap-4 transition-all duration-500 cursor-pointer
-        ${
-          active
-            ? "scale-[1.05] -translate-y-2 z-20"
-            : "scale-[0.95] translate-y-2 opacity-70 z-10"
-        }
+        ${active ? "scale-[1.05] -translate-y-2 z-20" : "scale-[0.95] translate-y-2 opacity-70 z-10"}
         w-[clamp(300px,45vw,540px)] h-[clamp(300px,50vh,520px)]
       `}
     >
       <div className="w-full relative" style={{ paddingTop: "71.2%" }}>
         <Image
           src={imageSrc}
-          alt="image"
+          alt="Dashboard image"
           fill
           className="object-contain pointer-events-none"
           priority
         />
       </div>
+
       {active && (
         <Link href={buttonHref}>
           <button className="px-4 py-2 w-full rounded-md font-medium bg-orange-500 text-white hover:bg-orange-600 transition text-[clamp(0.875rem,2vw,1rem)]">

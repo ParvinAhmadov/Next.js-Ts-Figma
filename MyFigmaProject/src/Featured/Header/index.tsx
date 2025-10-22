@@ -6,6 +6,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
 import { CiDark, CiLight } from "react-icons/ci";
 import { useTheme } from "@/context";
+import Link from "next/link";
 
 interface HeaderProps {
   isTransparent?: boolean;
@@ -76,16 +77,16 @@ const Header = ({
   ];
   return (
     <header
-    className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
-      isTransparent
-        ? "bg-transparent text-white"
-        : bgColor
-        ? `${bgColor} ${isDark ? "text-white" : "text-black"}`
-        : isDark
-        ? "bg-[#101D31] text-white"
-        : "bg-white text-black"
-    }`}
-  >
+      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+        isTransparent
+          ? "bg-transparent text-white"
+          : bgColor
+          ? `${bgColor} ${isDark ? "text-white" : "text-black"}`
+          : isDark
+          ? "bg-[#101D31] text-white"
+          : "bg-white text-black"
+      }`}
+    >
       <div
         className="flex items-center justify-between py-4 px-4 mx-auto"
         style={{ maxWidth: `${containerMaxWidth}px` }}
@@ -100,12 +101,14 @@ const Header = ({
               className="object-contain"
             />
           </div>
-          <span
-            style={{ fontSize: generateClamp(16, 22) }}
-            className="font-bold"
-          >
-            SEARCHART
-          </span>
+          <Link href="/">
+            <span
+              style={{ fontSize: generateClamp(16, 22) }}
+              className="font-bold"
+            >
+              SEARCHART
+            </span>
+          </Link>
         </div>
 
         <nav className="hidden relative  lg:flex items-center gap-5">

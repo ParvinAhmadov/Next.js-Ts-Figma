@@ -51,7 +51,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
 
       {active && (
         <Link href={buttonHref}>
-          <button className="px-4 py-2 w-full rounded-md font-medium bg-orange-500 text-white hover:bg-orange-600 transition text-[clamp(0.875rem,2vw,1rem)]">
+          <button className="px-4   py-2 w-full rounded-md font-medium bg-orange-500 text-white hover:bg-orange-600 transition text-[clamp(0.875rem,2vw,1rem)]">
             {buttonLabel}
           </button>
         </Link>

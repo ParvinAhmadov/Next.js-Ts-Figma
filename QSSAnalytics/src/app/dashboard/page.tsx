@@ -55,7 +55,7 @@ export default function Dashboard() {
         setActiveIndex={setActiveIndex}
       />
 
-      <div className="w-full mt-10 px-4">{renderContent()}</div>
+      <div className="w-full">{renderContent()}</div>
     </div>
   );
 }

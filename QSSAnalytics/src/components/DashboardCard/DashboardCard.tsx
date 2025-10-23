@@ -5,25 +5,25 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface DashboardCardProps {
-  caption: string;
-  imageSrcLight: string;
-  imageSrcDark: string;
-  isDark: boolean;
-  active: boolean;
-  onClick: () => void;
-  buttonLabel: string;
-  buttonHref: string;
+  caption?: string;
+  imageSrcLight?: string;
+  imageSrcDark?: string;
+  isDark?: boolean;
+  active?: boolean;
+  onClick?: () => void;
+  buttonLabel?: string;
+  buttonHref?: string;
 }
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
-  caption,
-  imageSrcLight,
-  imageSrcDark,
-  isDark,
-  active,
-  onClick,
-  buttonLabel,
-  buttonHref,
+  caption = "Default caption",
+  imageSrcLight = "/images/default-light.png",
+  imageSrcDark = "/images/default-dark.png",
+  isDark = false,
+  active = false,
+  onClick = () => {},
+  buttonLabel = "Learn more",
+  buttonHref = "/",
 }) => {
   const imageSrc = isDark ? imageSrcDark : imageSrcLight;
 
@@ -31,7 +31,11 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
     <div
       onClick={onClick}
       className={`flex flex-col items-center gap-4 transition-all duration-500 cursor-pointer
-        ${active ? "scale-[1.05] -translate-y-2 z-20" : "scale-[0.95] translate-y-2 opacity-70 z-10"}
+        ${
+          active
+            ? "scale-[1.05] -translate-y-2 z-20"
+            : "scale-[0.95] translate-y-2 opacity-70 z-10"
+        }
         w-[clamp(300px,45vw,540px)] h-[clamp(300px,50vh,520px)]
       `}
     >

@@ -119,12 +119,20 @@ const IndicatorAnalysis: React.FC = () => {
             reverse={chart.reverse}
           />
         ))}
-        <div className="text-center">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="flex flex-col items-center gap-2"
+        >
           <Link href="">
-            <button className="inline-flex items-center  gap-2 px-4 py-2 rounded-md font-medium bg-orange-500 text-white hover:bg-orange-600 transition text-[clamp(0.875rem,2vw,1rem)]">
-              Dashboard
-              <FiArrowRight className="text-lg" />
+            <button className="inline-flex items-center gap-2 px-6 py-2 rounded-md font-medium bg-[#CC3203] cursor-pointer text-white hover:bg-orange-600 transition text-[clamp(0.875rem,2vw,1rem)] shadow-md">
+              Dashboard <FiArrowRight className="text-lg" />
             </button>
+          </Link>
+          <Link href="">
+            <p className="text-sm opacity-70 hover:opacity-100 transition text-[#9DA2AA]">
+              Go to Overview Dashboard
+            </p>
           </Link>
         </div>
       </div>

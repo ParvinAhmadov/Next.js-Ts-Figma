@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useTheme } from "@/context";
-import OverallScoreCard from "./OverallScoreCard";
 import OverallScoreAnalysis from "./OverallScoreCard";
 import SectorAnalysis from "./SectorAnalysis";
 import IndicatorAnalysis from "./IndicatorAnalysis";

@@ -83,7 +83,7 @@ const DashboardShowcase: React.FC<DashboardShowcaseProps> = ({
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-center">
-        <div className="hidden lg:flex gap-[200px] justify-center w-full mb-4">
+        <div className="hidden lg:flex gap-[200px] justify-center w-full mb-6 ">
           {dashboards.map((dash, index) => (
             <p
               key={dash.key}
@@ -132,7 +132,7 @@ const DashboardShowcase: React.FC<DashboardShowcaseProps> = ({
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex justify-center items-center gap-3 mt-6">
+          <div className="flex justify-center items-center gap-3 ">
             {dashboards.map((_, index) => (
               <button
                 key={index}

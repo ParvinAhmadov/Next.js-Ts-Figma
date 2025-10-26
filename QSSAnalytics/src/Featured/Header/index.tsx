@@ -181,7 +181,7 @@ const Header = ({
             Dashboard
           </a>
           <a
-            href="#"
+            href="/subscription"
             className="hover:underline"
             style={{ fontSize: generateClamp(14, 16) }}
           >

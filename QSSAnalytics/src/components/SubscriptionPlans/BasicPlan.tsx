@@ -17,7 +17,7 @@ interface BasicPlanProps {
 const BasicPlan: React.FC<BasicPlanProps> = ({ plan, isDark }) => {
   return (
     <div
-      className={`relative rounded-2xl p-10 shadow-xl w-full max-w-[550px] ${
+      className={`relative rounded-2xl p-[clamp(1rem,2vw,2.5rem)] shadow-xl w-full max-w-[550px] ${
         isDark
           ? "bg-gradient-to-br from-[#2a4a6a] via-[#234058] to-[#1d3648] border border-[#3a5a7a]"
           : "bg-white border border-gray-300"
@@ -25,15 +25,15 @@ const BasicPlan: React.FC<BasicPlanProps> = ({ plan, isDark }) => {
     >
       <div className="mt-2 mb-10">
         <p
-          className={`text-4xl font-bold ${
+          className={`text-[clamp(2rem,5vw,3rem)] font-bold ${
             isDark ? "text-gray-400" : "text-blue-400"
           }`}
         >
-          $ {plan.price}/month
+          {plan.price}/month
         </p>
       </div>
 
-      <ul className="space-y-5">
+      <ul className="space-y-[clamp(0.5rem,1.5vw,1.25rem)] text-[clamp(0.875rem,2vw,1rem)]">
         {plan.features.map((feature, idx) => (
           <li key={idx} className="flex items-center gap-3">
             <div
@@ -59,13 +59,7 @@ const BasicPlan: React.FC<BasicPlanProps> = ({ plan, isDark }) => {
                 />
               </svg>
             </div>
-            <span
-              className={`text-base ${
-                isDark ? "text-gray-200" : "text-gray-800"
-              }`}
-            >
-              {feature}
-            </span>
+            <span className="text-[clamp(0.875rem,1.5vw,1rem)]">{feature}</span>
           </li>
         ))}
       </ul>

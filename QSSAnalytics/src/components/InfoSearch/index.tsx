@@ -3,11 +3,18 @@
 import { generateClamp } from "@/utils/clamp";
 import React from "react";
 import { useTheme } from "@/context";
+import { motion } from "framer-motion";
+import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 
 const InfoSearch: React.FC = () => {
   const { theme } = useTheme();
-
   const isDark = theme === "dark";
+  const handleClick = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section
@@ -69,14 +76,22 @@ const InfoSearch: React.FC = () => {
           evaluate different countries performances, or conduct further
           research.
         </p>
-
-        <div
-          className={`text-sm animate-bounce transition-colors duration-500 ${
-            isDark ? "text-gray-400" : "text-gray-500"
-          }`}
-          style={{ fontSize: generateClamp(12, 18) }}
-        >
-          Scroll to ↓
+        <div className="cursor-pointer flex flex-col items-center gap-1 select-none">
+          <span style={{ fontSize: generateClamp(12, 16) }}>Scroll to</span>
+          <motion.div
+            onClick={handleClick}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            animate={{ y: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1 }}
+            style={{
+              fontSize: generateClamp(12, 18),
+              color: isDark ? "#A0AEC0" : "#718096",
+            }}
+          >
+            <div></div>
+            <MdOutlineKeyboardDoubleArrowDown className="w-[30px] h-[30px]" />
+          </motion.div>
         </div>
       </div>
     </section>

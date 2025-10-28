@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex justify-center gap-4">
-          <a
+          <Link
             href="https://facebook.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -61,8 +61,8 @@ const Footer: React.FC = () => {
             }`}
           >
             <FaFacebookF size={18} />
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -71,8 +71,8 @@ const Footer: React.FC = () => {
             }`}
           >
             <FaInstagram size={18} />
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
             }`}
           >
             <FaLinkedinIn size={18} />
-          </a>
+          </Link>
         </div>
 
         <div

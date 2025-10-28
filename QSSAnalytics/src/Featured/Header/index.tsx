@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CiDark, CiLight } from "react-icons/ci";
 import { useTheme } from "@/context";
 import Link from "next/link";
+import { TbPointFilled } from "react-icons/tb";
 
 interface HeaderProps {
   isTransparent?: boolean;
@@ -77,18 +78,17 @@ const Header = ({
   ];
   return (
     <header
-    className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
-    isTransparent
-      ? isDark
-        ? "bg-transparent text-white"
-          : "bg-transparent text-black"
-        
-      : bgColor
-      ? `${bgColor} ${isDark ? "text-white" : "text-black"}`
-      : isDark
-      ? "bg-[#101D31] text-white"
-      : "bg-white text-black"
-  }`}
+      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+        isTransparent
+          ? isDark
+            ? "bg-transparent text-white"
+            : "bg-transparent text-black"
+          : bgColor
+          ? `${bgColor} ${isDark ? "text-white" : "text-black"}`
+          : isDark
+          ? "bg-[#101D31] text-white"
+          : "bg-white text-black"
+      }`}
     >
       <div
         className="flex items-center justify-between py-4 px-4 mx-auto"
@@ -115,9 +115,9 @@ const Header = ({
         </div>
 
         <nav className="hidden relative  lg:flex items-center gap-5">
-          <a
+          <Link
             href="#"
-            className={`hover:underline ${
+            className={`relative inline-flex items-center group ${
               theme === "dark" ? "text-white" : "text-black"
             }`}
             style={{ fontSize: generateClamp(14, 16) }}
@@ -127,7 +127,11 @@ const Header = ({
             }}
           >
             Policy area
-          </a>
+            <TbPointFilled
+              className="absolute -bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity"
+              size={15}
+            />
+          </Link>
 
           <AnimatePresence>
             {isPolicyOpen && (
@@ -136,7 +140,7 @@ const Header = ({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className={`absolute top-full left-0 mt-2 shadow-lg rounded-md py-2 z-40 w-64 ${
+                className={`absolute top-full left-0 mt-3 shadow-lg rounded-md py-2 z-40 w-64 ${
                   theme === "dark" ? "bg-[#111F35]" : "bg-white"
                 }`}
               >
@@ -146,7 +150,7 @@ const Header = ({
                   }`}
                 >
                   {navItems.map((item, i) => (
-                    <a
+                    <Link
                       key={i}
                       href="#"
                       className={`flex items-center w-[240px] h-[40px] px-2 gap-3 rounded transition-colors duration-300 ${
@@ -169,52 +173,63 @@ const Header = ({
                       <span className="text-sm whitespace-nowrap">
                         {item.label}
                       </span>
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </motion.div>
             )}
           </AnimatePresence>
 
-          <a
+          <Link
             href="/dashboard"
-            className="hover:underline"
+            className="relative inline-flex items-center group"
             style={{ fontSize: generateClamp(14, 16) }}
           >
             Dashboard
-          </a>
-          <a
+            <TbPointFilled
+              className="absolute -bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              size={15}
+            />
+          </Link>
+          <Link
             href="/subscription"
-            className="hover:underline"
+            className="relative inline-flex items-center group"
             style={{ fontSize: generateClamp(14, 16) }}
           >
             Subscription
-          </a>
-          <a
-            href="#"
-            className="hover:underline"
+            <TbPointFilled
+              className="absolute -bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              size={15}
+            />
+          </Link>
+          <Link
+            href="/about"
+            className="relative inline-flex items-center group"
             style={{ fontSize: generateClamp(14, 16) }}
           >
             About Us
-          </a>
+            <TbPointFilled
+              className="absolute -bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              size={15}
+            />
+          </Link>
           <div
-            className="flex items-center justify-center border p-2 rounded cursor-pointer"
+            className=" lg:flex items-center justify-center border p-2 rounded cursor-pointer"
             onClick={toggleTheme}
           >
             {theme === "dark" ? <CiLight size={20} /> : <CiDark size={20} />}
           </div>
         </nav>
-
         <div className="hidden lg:flex items-center gap-3">
-          <a
-            href="#"
+          <Link
+            href="/account"
             className="hover:underline"
             style={{ fontSize: generateClamp(14, 16) }}
           >
             Sign in
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/account"
             className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
               isDark
                 ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#111F35]"
@@ -223,10 +238,16 @@ const Header = ({
             style={{ fontSize: generateClamp(14, 16) }}
           >
             Sign up
-          </a>
+          </Link>
         </div>
 
-        <div className="lg:hidden">
+        <div className="lg:hidden flex items-center gap-4">
+          <div
+            className="flex items-center justify-center border p-2 rounded cursor-pointer"
+            onClick={toggleTheme}
+          >
+            {theme === "dark" ? <CiLight size={20} /> : <CiDark size={20} />}
+          </div>
           <button onClick={() => setIsOpen(true)}>
             <FiMenu size={24} />
           </button>
@@ -254,24 +275,27 @@ const Header = ({
             </button>
 
             <nav className="flex flex-col gap-6">
-              {["Policy area", "Dashboard", "Subscription", "About Us"].map(
-                (label, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className={`transition-colors duration-300 hover:underline ${
-                      isDark ? "text-gray-200" : "text-[#001228]"
-                    }`}
-                    style={{ fontSize: generateClamp(14, 16) }}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {label}
-                  </a>
-                )
-              )}
+              {[
+                { label: "Policy area", href: "/policy" },
+                { label: "Dashboard", href: "/dashboard" },
+                { label: "Subscription", href: "/subscription" },
+                { label: "About Us", href: "/about" },
+              ].map((item, i) => (
+                <Link
+                  key={i}
+                  href={item.href}
+                  className={`transition-colors duration-300 hover:underline ${
+                    isDark ? "text-gray-200" : "text-[#001228]"
+                  }`}
+                  style={{ fontSize: generateClamp(14, 16) }}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
 
-              <a
-                href="#"
+              <Link
+                href="/account/signin"
                 className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
                   isDark
                     ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#001228]"
@@ -281,10 +305,10 @@ const Header = ({
                 onClick={() => setIsOpen(false)}
               >
                 Sign in
-              </a>
+              </Link>
 
-              <a
-                href="#"
+              <Link
+                href="/account/signup"
                 className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
                   isDark
                     ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#001228]"
@@ -294,7 +318,7 @@ const Header = ({
                 onClick={() => setIsOpen(false)}
               >
                 Sign up
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}

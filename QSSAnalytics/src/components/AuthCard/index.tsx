@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
 import { generateClamp } from "@/utils/clamp";
 import { useTheme } from "@/context";
+import Link from "next/link";
 
 type Step = "login" | "register1" | "register2";
 
@@ -146,9 +147,9 @@ export default function AuthCard() {
                   isDark ? "text-gray-300" : "text-[#103557]"
                 }`}
               >
-                <a href="#" className="hover:underline">
+                <Link href="#" className="hover:underline">
                   Forgot Password?
-                </a>
+                </Link>
               </div>
 
               <button

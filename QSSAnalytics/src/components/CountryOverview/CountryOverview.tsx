@@ -44,18 +44,7 @@ const CountryOverview: React.FC = () => {
           width={"100"}
           height={"100"}
         />
-        {/* <img
-          src="https://searchartfront-production.up.railway.app/assets/vector-2-3dfa1800.svg"
-          alt="bg-left-bottom"
-          className="absolute bottom-0 left-0 w-full object-contain opacity-30"
-          style={{ filter: isDark ? "brightness(0.2)" : "brightness(0.9)" }}
-        />
-        <img
-          src="https://searchartfront-production.up.railway.app/assets/vector-1-0010a756.svg"
-          alt="bg-right-top"
-          className="absolute -top-16 right-0 w-[1200px] object-contain opacity-20"
-          style={{ filter: isDark ? "brightness(0.2)" : "brightness(0.9)" }}
-        /> */}
+      
       </div>
 
       <div

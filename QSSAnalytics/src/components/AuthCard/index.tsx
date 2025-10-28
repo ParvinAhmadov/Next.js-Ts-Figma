@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
 import { generateClamp } from "@/utils/clamp";
+import { useTheme } from "@/context";
 
 type Step = "login" | "register1" | "register2";
 
@@ -20,31 +21,49 @@ type InputFieldProps = {
 
 const InputField = ({
   label,
-  labelStyle = "text-sm font-medium text-gray-700",
+  labelStyle = "text-sm font-medium",
   type = "text",
   value,
   onChange,
   placeholder,
   children,
-}: InputFieldProps) => (
-  <div className="mb-4">
-    <label className={`block mb-1 ${labelStyle}`}>{label}</label>
-    <div className="relative">
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-1"
-      />
-      {children}
+}: InputFieldProps) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  return (
+    <div className="mb-4">
+      <label
+        className={`block mb-1 ${labelStyle} ${
+          isDark ? "text-gray-200" : "text-gray-700"
+        }`}
+      >
+        {label}
+      </label>
+      <div className="relative">
+        <input
+          type={type}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          className={`w-full h-[50px] px-4 border rounded-[7px] text-[16px] mb-1
+            ${
+              isDark
+                ? "bg-[#1f2937] border-gray-600 text-white"
+                : "bg-[#FBFBFB] border-[#E9E9E9] text-[#103557]"
+            }`}
+        />
+        {children}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function AuthCard() {
   const [step, setStep] = useState<Step>("login");
   const [showPassword, setShowPassword] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const handleNext = () => setStep("register2");
   const handleBackToLogin = () => setStep("login");
@@ -52,7 +71,9 @@ export default function AuthCard() {
   return (
     <div className="w-full max-w-md mx-auto">
       <div
-        className="sm:w-[380px] lg:w-[430px] h-[543px] rounded-[7px] overflow-hidden bg-white shadow-lg  "
+        className={`sm:w-[380px] lg:w-[430px] h-[543px] rounded-[7px] overflow-hidden shadow-lg transition-colors duration-500 ${
+          isDark ? "bg-[#111827] text-white" : "bg-white text-black"
+        }`}
         style={{ perspective: 1000 }}
       >
         <AnimatePresence mode="wait">
@@ -69,8 +90,9 @@ export default function AuthCard() {
                 <div
                   className="w-[68px] h-[68px] rounded-full flex items-center justify-center overflow-hidden"
                   style={{
-                    backgroundImage:
-                      "linear-gradient(135deg, #12233D, #000000)",
+                    backgroundImage: isDark
+                      ? "linear-gradient(135deg, #334155, #000)"
+                      : "linear-gradient(135deg, #12233D, #000000)",
                   }}
                 >
                   <Image
@@ -87,7 +109,9 @@ export default function AuthCard() {
                     fontSize: generateClamp(18, 22),
                     lineHeight: generateClamp(22, 28),
                   }}
-                  className="text-[#103557] font-semibold mt-4"
+                  className={`font-semibold mt-4 ${
+                    isDark ? "text-white" : "text-[#103557]"
+                  }`}
                 >
                   Welcome Searchart !
                 </h2>
@@ -95,24 +119,34 @@ export default function AuthCard() {
 
               <InputField
                 label="E-mail address"
-                labelStyle="text-[16px] font-semibold text-[#515151]"
+                labelStyle={`text-[16px] font-semibold ${
+                  isDark ? "text-gray-200" : "text-[#515151]"
+                }`}
               />
               <InputField
                 label="Password"
-                labelStyle="text-[16px] font-semibold text-[#515151]"
+                labelStyle={`text-[16px] font-semibold ${
+                  isDark ? "text-gray-200" : "text-[#515151]"
+                }`}
                 type={showPassword ? "text" : "password"}
               >
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-3 text-gray-600 text-[#103557]"
+                  className={`absolute right-4 top-3 ${
+                    isDark ? "text-gray-300" : "text-[#103557]"
+                  }`}
                 >
                   {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
                 </button>
               </InputField>
 
-              <div className="text-right text-[12px] mb-4 font-normal">
-                <a href="#" className="text-[#103557] hover:underline">
+              <div
+                className={`text-right text-[12px] mb-4 font-normal ${
+                  isDark ? "text-gray-300" : "text-[#103557]"
+                }`}
+              >
+                <a href="#" className="hover:underline">
                   Forgot Password?
                 </a>
               </div>
@@ -121,7 +155,11 @@ export default function AuthCard() {
                 style={{
                   fontSize: generateClamp(16, 20),
                 }}
-                className="w-full h-[50px] bg-[#103557] text-white rounded-[7px] font-semibold"
+                className={`w-full h-[50px] rounded-[7px] font-semibold transition-colors duration-300 ${
+                  isDark
+                    ? "bg-[#2563eb] hover:bg-[#1e3a8a] text-white"
+                    : "bg-[#103557] text-white hover:bg-[#1e3a8a]"
+                }`}
               >
                 Sign in
               </button>
@@ -130,12 +168,16 @@ export default function AuthCard() {
                 style={{
                   fontSize: generateClamp(10, 14),
                 }}
-                className="text-[#515151] text-center mt-6"
+                className={`text-center mt-6 ${
+                  isDark ? "text-gray-300" : "text-[#515151]"
+                }`}
               >
                 Not registered yet?{" "}
                 <button
                   onClick={() => setStep("register1")}
-                  className="text-[#103557] hover:underline"
+                  className={`hover:underline ${
+                    isDark ? "text-blue-400" : "text-[#103557]"
+                  }`}
                 >
                   Create an account
                 </button>
@@ -155,7 +197,9 @@ export default function AuthCard() {
               <div>
                 <div className="flex items-center justify-center">
                   <h2
-                    className="text-[#103557] font-semibold mb-6"
+                    className={`font-semibold mb-6 ${
+                      isDark ? "text-white" : "text-[#103557]"
+                    }`}
                     style={{
                       fontSize: generateClamp(18, 22),
                       lineHeight: generateClamp(22, 28),
@@ -166,61 +210,69 @@ export default function AuthCard() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-3">
-                  <div>
-                    <label
-                      className="block font-normal text-[#727272] mb-1"
-                      style={{ fontSize: generateClamp(13, 16) }}
-                    >
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
-                      style={{ fontSize: generateClamp(14, 16) }}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block font-normal text-[#727272] mb-1"
-                      style={{ fontSize: generateClamp(13, 16) }}
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
-                      style={{ fontSize: generateClamp(14, 16) }}
-                    />
-                  </div>
+                  {["First Name", "Last Name"].map((label, i) => (
+                    <div key={i}>
+                      <label
+                        className={`block font-normal mb-1 ${
+                          isDark ? "text-gray-300" : "text-[#727272]"
+                        }`}
+                        style={{ fontSize: generateClamp(13, 16) }}
+                      >
+                        {label}
+                      </label>
+                      <input
+                        type="text"
+                        className={`w-full h-[50px] px-4 border rounded-[7px] mb-4 ${
+                          isDark
+                            ? "bg-[#1f2937] border-gray-600 text-white"
+                            : "bg-[#FBFBFB] border-[#E9E9E9]"
+                        }`}
+                        style={{ fontSize: generateClamp(14, 16) }}
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <label
-                  className="block font-normal text-[#727272] mb-1"
+                  className={`block font-normal mb-1 ${
+                    isDark ? "text-gray-300" : "text-[#727272]"
+                  }`}
                   style={{ fontSize: generateClamp(13, 16) }}
                 >
                   Gender
                 </label>
                 <input
                   type="text"
-                  className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-1"
-                  style={{ fontSize: generateClamp(14, 16) }}
+                  className={`w-full h-[50px] px-4 border rounded-[7px] mb-1 ${
+                    isDark
+                      ? "bg-[#1f2937] border-gray-600 text-white"
+                      : "bg-[#FBFBFB] border-[#E9E9E9]"
+                  }`}
                 />
 
                 <label
-                  className="block font-normal text-[#727272]"
-                  style={{ fontSize: generateClamp(13, 16) }}
+                  className={`block font-normal ${
+                    isDark ? "text-gray-300" : "text-[#727272]"
+                  }`}
                 >
                   Phone Number
                 </label>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-gray-100 border border-gray-300 rounded-[7px] min-w-[90px]">
+                  <div
+                    className={`flex-shrink-0 flex items-center gap-2 px-3 py-2 border rounded-[7px] min-w-[90px] ${
+                      isDark
+                        ? "bg-[#374151] border-gray-600"
+                        : "bg-gray-100 border-gray-300"
+                    }`}
+                  >
                     <span
-                      className="font-medium text-[#515151]"
+                      className={`font-medium ${
+                        isDark ? "text-gray-200" : "text-[#515151]"
+                      }`}
                       style={{ fontSize: generateClamp(12, 14) }}
                     >
                       +994
                     </span>
-
                     <Image
                       src="/images/images.jpeg"
                       alt="Azerbaijan Flag"
@@ -232,49 +284,46 @@ export default function AuthCard() {
 
                   <input
                     type="tel"
-                    className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB]"
-                    style={{ fontSize: generateClamp(14, 16) }}
+                    className={`w-full h-[50px] px-4 border rounded-[7px] ${
+                      isDark
+                        ? "bg-[#1f2937] border-gray-600 text-white"
+                        : "bg-[#FBFBFB] border-[#E9E9E9]"
+                    }`}
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label
-                      className="block font-normal text-[#727272] mb-1"
-                      style={{ fontSize: generateClamp(13, 16) }}
-                    >
-                      Company
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
-                      style={{ fontSize: generateClamp(14, 16) }}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block font-normal text-[#727272] mb-1"
-                      style={{ fontSize: generateClamp(13, 16) }}
-                    >
-                      Industry
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full h-[50px] px-4 border border-[#E9E9E9] rounded-[7px] bg-[#FBFBFB] mb-4"
-                      style={{ fontSize: generateClamp(14, 16) }}
-                    />
-                  </div>
+                  {["Company", "Industry"].map((label, i) => (
+                    <div key={i}>
+                      <label
+                        className={`block font-normal mb-1 ${
+                          isDark ? "text-gray-300" : "text-[#727272]"
+                        }`}
+                        style={{ fontSize: generateClamp(13, 16) }}
+                      >
+                        {label}
+                      </label>
+                      <input
+                        type="text"
+                        className={`w-full h-[50px] px-4 border rounded-[7px] mb-4 ${
+                          isDark
+                            ? "bg-[#1f2937] border-gray-600 text-white"
+                            : "bg-[#FBFBFB] border-[#E9E9E9]"
+                        }`}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
 
               <div>
                 <button
                   onClick={handleNext}
-                  className="w-full h-[50px] bg-[#103557] text-white rounded-[7px] flex items-center justify-center group transition-all duration-300 mb-1"
-                  style={{
-                    fontSize: generateClamp(16, 20),
-                    lineHeight: generateClamp(20, 24),
-                  }}
+                  className={`w-full h-[50px] rounded-[7px] flex items-center justify-center group transition-all duration-300 mb-1 ${
+                    isDark
+                      ? "bg-[#2563eb] hover:bg-[#1e3a8a]"
+                      : "bg-[#103557] hover:bg-[#1e3a8a]"
+                  } text-white font-medium`}
                 >
                   <span className="mr-2">Next</span>
                   <FiArrowRight
@@ -284,14 +333,17 @@ export default function AuthCard() {
                 </button>
 
                 <p
-                  className="text-center text-[#515151]"
+                  className={`text-center ${
+                    isDark ? "text-gray-300" : "text-[#515151]"
+                  }`}
                   style={{ fontSize: generateClamp(10, 12) }}
                 >
                   Already have an account?{" "}
                   <button
                     onClick={handleBackToLogin}
-                    className="text-[#103557] hover:underline"
-                    style={{ fontSize: generateClamp(10, 12) }}
+                    className={`hover:underline ${
+                      isDark ? "text-blue-400" : "text-[#103557]"
+                    }`}
                   >
                     Log in
                   </button>
@@ -312,61 +364,92 @@ export default function AuthCard() {
               <div>
                 <div className="flex items-center justify-center">
                   <h2
-                    className="text-[20px] text-[#103557] font-semibold
- font-bold mb-6"
+                    className={`text-[20px] font-bold mb-6 ${
+                      isDark ? "text-white" : "text-[#103557]"
+                    }`}
                   >
                     Registration
                   </h2>
                 </div>
 
-                <label className="block text-[#727272] text-normal text-[14px] mb-1">
-                  Job title
-                </label>
-                <input
-                  type="text"
-                  className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-4"
-                />
+                {["Job title", "Email address"].map((label, i) => (
+                  <div key={i}>
+                    <label
+                      className={`block mb-1 ${
+                        isDark ? "text-gray-300" : "text-[#727272]"
+                      }`}
+                    >
+                      {label}
+                    </label>
+                    <input
+                      type={label.includes("Email") ? "email" : "text"}
+                      className={`w-full h-[50px] px-4 border rounded-[7px] mb-4 ${
+                        isDark
+                          ? "bg-[#1f2937] border-gray-600 text-white"
+                          : "bg-[#FBFBFB] border-[#E9E9E9]"
+                      }`}
+                    />
+                  </div>
+                ))}
 
-                <label className="block text-[#727272] text-normal text-[14px] mb-1">
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-4"
-                />
-
-                <label className="block text-[#727272] text-normal text-[14px] mb-1">
+                <label
+                  className={`block mb-1 ${
+                    isDark ? "text-gray-300" : "text-[#727272]"
+                  }`}
+                >
                   Password
                 </label>
                 <div className="relative mb-4">
                   <input
                     type={showPassword ? "text" : "password"}
-                    className="w-full h-[50px] px-4 border border-gray-300 border border-[#E9E9E9] rounded-[7px] text-[16px] bg-[#FBFBFB] mb-4"
+                    className={`w-full h-[50px] px-4 border rounded-[7px] mb-4 ${
+                      isDark
+                        ? "bg-[#1f2937] border-gray-600 text-white"
+                        : "bg-[#FBFBFB] border-[#E9E9E9]"
+                    }`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-[13px] text-gray-600"
+                    className="absolute right-4 top-[13px]"
                   >
                     {showPassword ? (
-                      <FiEyeOff className="text-[#103557]" size={20} />
+                      <FiEyeOff
+                        className={isDark ? "text-blue-400" : "text-[#103557]"}
+                        size={20}
+                      />
                     ) : (
-                      <FiEye className="text-[#103557]" size={20} />
+                      <FiEye
+                        className={isDark ? "text-blue-400" : "text-[#103557]"}
+                        size={20}
+                      />
                     )}
                   </button>
                 </div>
               </div>
 
               <div>
-                <button className="w-full h-[50px] bg-[#103557] text-white rounded-[7px] text-[20px] font-medium">
+                <button
+                  className={`w-full h-[50px] rounded-[7px] font-medium ${
+                    isDark
+                      ? "bg-[#2563eb] hover:bg-[#1e3a8a]"
+                      : "bg-[#103557] hover:bg-[#1e3a8a]"
+                  } text-white text-[20px]`}
+                >
                   Registration
                 </button>
 
-                <p className="text-[12px] text-center mt-6 text-[#515151]">
+                <p
+                  className={`text-[12px] text-center mt-6 ${
+                    isDark ? "text-gray-300" : "text-[#515151]"
+                  }`}
+                >
                   Already have an account?{" "}
                   <button
                     onClick={handleBackToLogin}
-                    className="text-[#103557] hover:underline"
+                    className={`hover:underline ${
+                      isDark ? "text-blue-400" : "text-[#103557]"
+                    }`}
                   >
                     Log in
                   </button>

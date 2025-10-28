@@ -77,15 +77,18 @@ const Header = ({
   ];
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
-        isTransparent
-          ? "bg-transparent text-white"
-          : bgColor
-          ? `${bgColor} ${isDark ? "text-white" : "text-black"}`
-          : isDark
-          ? "bg-[#101D31] text-white"
-          : "bg-white text-black"
-      }`}
+    className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+    isTransparent
+      ? isDark
+        ? "bg-transparent text-white"
+          : "bg-transparent text-black"
+        
+      : bgColor
+      ? `${bgColor} ${isDark ? "text-white" : "text-black"}`
+      : isDark
+      ? "bg-[#101D31] text-white"
+      : "bg-white text-black"
+  }`}
     >
       <div
         className="flex items-center justify-between py-4 px-4 mx-auto"

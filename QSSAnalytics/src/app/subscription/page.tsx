@@ -82,7 +82,7 @@ const SubscriptionPage: React.FC = () => {
 
         <div className="flex items-center justify-center">
           <div className="grid lg:grid-cols-[550px_auto] lg:gap-18 items-start">
-            <div className="flex justify-center lg:justify-end min-h-[460px]">
+            <div className="flex justify-center lg:justify-end md:min-h-[460px] min-h-[360px] lg:min-h-[460px]">
               <div className="transition-all duration-300">
                 {selectedPlan === "premium" ? (
                   <PremiumPlan plan={currentPlan} isDark={isDark} />

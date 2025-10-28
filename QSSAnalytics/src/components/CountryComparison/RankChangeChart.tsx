@@ -37,7 +37,7 @@ const RankChangeChart: React.FC = () => {
         >
           The Change in Rank Chart allows users to compare the rank differences
           between two selected years for a specific indicator across various
-          countries. This chart helps users understand how countries' rankings
+          countries. This chart helps users understand how countries rankings
           have changed over time, revealing the countries that improved or faced
           challenges in terms of the chosen KPI.
         </p>

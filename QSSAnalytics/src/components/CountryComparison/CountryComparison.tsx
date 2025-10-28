@@ -5,6 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useTheme } from "@/context";
 import RankChangeChart from "./RankChangeChart";
+import Image from "next/image";
 const CountryComparison: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -23,7 +24,25 @@ const CountryComparison: React.FC = () => {
       }`}
     >
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
-        <img
+        <Image
+          src={
+            "https://searchartfront-production.up.railway.app/assets/vector-2-3dfa1800.svg"
+          }
+          alt="bg-left-bottom"
+          className="absolute bottom-0 left-0 w-full object-contain opacity-30"
+          style={{ filter: isDark ? "brightness(0.2)" : "brightness(0.9)" }}
+          width={"100"}
+          height={"100"}
+        />
+        <Image
+          src="https://searchartfront-production.up.railway.app/assets/vector-1-0010a756.svg"
+          alt="bg-left-bottom"
+          className="absolute bottom-0 left-0 w-full object-contain opacity-30"
+          style={{ filter: isDark ? "brightness(0.2)" : "brightness(0.9)" }}
+          width={"100"}
+          height={"100"}
+        />
+        {/* <img
           src="https://searchartfront-production.up.railway.app/assets/vector-2-3dfa1800.svg"
           alt="bg-left-bottom"
           className="absolute bottom-0 left-0 w-full object-contain opacity-30"
@@ -31,10 +50,10 @@ const CountryComparison: React.FC = () => {
         />
         <img
           src="https://searchartfront-production.up.railway.app/assets/vector-1-0010a756.svg"
-          alt="bg-right-top"
-          className="absolute -top-16 right-0 w-[1200px] object-contain opacity-20"
+          alt="bg-left-bottom"
+          className="absolute bottom-0 left-0 w-full object-contain opacity-30"
           style={{ filter: isDark ? "brightness(0.2)" : "brightness(0.9)" }}
-        />
+        /> */}
       </div>
 
       <div

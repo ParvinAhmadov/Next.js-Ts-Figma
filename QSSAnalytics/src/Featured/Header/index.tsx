@@ -78,7 +78,9 @@ const Header = ({
   ];
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full transition-colors duration-300 ${
+      className={`${
+        isTransparent ? "absolute" : "fixed"
+      } top-0 left-0 z-50 w-full transition-colors duration-300 ${
         isTransparent
           ? isDark
             ? "bg-transparent text-white"
@@ -295,7 +297,7 @@ const Header = ({
               ))}
 
               <Link
-                href="/account/signin"
+                href="/account"
                 className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
                   isDark
                     ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#001228]"
@@ -308,7 +310,7 @@ const Header = ({
               </Link>
 
               <Link
-                href="/account/signup"
+                href="/account"
                 className={`px-3 py-1.5 rounded-[6px] text-center transition-colors duration-300 border ${
                   isDark
                     ? "border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-[#001228]"

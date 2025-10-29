@@ -42,33 +42,37 @@ const WhyChooseSearchart: React.FC = () => {
     },
   ];
 
-  const bgColor = isDark ? "bg-[#0F1622]" : "bg-[#F9FAFB]";
-  const titleColor = isDark ? "text-white" : "text-gray-900";
+  const bgColor = isDark ? "bg-[#0F1622]" : "bg-[#FBFBFB]";
+  const titleColor = isDark ? "text-white" : "text-[#030712]";
   const subtitleColor = isDark ? "text-gray-300" : "text-gray-700";
-  const numberColor = isDark ? "text-blue-400" : "text-blue-600";
+  const numberColor = isDark ? "text-white" : "text-[#B3B7BE]";
 
   return (
-    <section className={`w-full py-20 ${bgColor}`}>
-      <div className="max-w-[1400px] mx-auto px-4">
+    <section className={`w-full py-12 md:py-16 lg:py-20 ${bgColor}`}>
+      <div className="max-w-[1440px]  mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-10 lg:mb-12"
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className={`text-3xl lg:text-4xl font-bold mb-4 ${titleColor}`}>
+          <h2
+            className={`text-2xl sm:text-3xl lg:text-[30px] font-bold mb-3 md:mb-4 ${titleColor}`}
+          >
             Why Choose Searchart?
           </h2>
-          <p className={`text-base lg:text-lg ${subtitleColor}`}>
+          <p
+            className={`text-sm sm:text-base lg:text-[16px] max-w-4xl mx-auto ${subtitleColor}`}
+          >
             We take pride in being at the forefront of data-driven solutions.
             Here are some reasons why Searchart stands out:
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-6 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div
-            className="space-y-8"
+            className="space-y-6 md:space-y-8"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -77,42 +81,43 @@ const WhyChooseSearchart: React.FC = () => {
             {reasons.map((reason, index) => (
               <motion.div
                 key={reason.number}
-                className="flex gap-6"
+                className="flex gap-4 md:gap-6 items-start"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div
-                  className={`text-5xl lg:text-6xl font-bold ${numberColor} flex-shrink-0`}
+                  className={`text-3xl sm:text-4xl lg:text-[26px] font-bold ${numberColor} flex-shrink-0 leading-none pt-1`}
                 >
                   {reason.number}
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <h3
-                    className={`text-lg lg:text-xl font-semibold ${titleColor}`}
+                <div className="flex-1 min-w-0">
+                  <p
+                    className={`text-sm sm:text-base lg:text-lg leading-relaxed ${titleColor}`}
                   >
                     {reason.title}
-                  </h3>
+                  </p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
 
           <motion.div
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center lg:justify-end mt-8 lg:mt-0"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative w-full max-w-[650px] lg:max-w-[700px] aspect-[4/4]">
+            <div className="relative w-full max-w-[800px] aspect-[4/4] mx-auto">
               <Image
                 src="https://searchartfront-production.up.railway.app/assets/why-choose-e0ca898b.png"
                 alt="Dashboard Analytics"
                 fill
-                className="object-contain w-full h-full"
+                className="object-contain"
+                priority
               />
             </div>
           </motion.div>

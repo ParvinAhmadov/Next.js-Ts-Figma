@@ -10,7 +10,7 @@ export default function Account() {
   const isDark = theme === "dark";
 
   return (
-    <div className="relative w-full h-screen overflow-hidden transition-colors duration-500">
+    <div className="relative w-full min-h-screen overflow-hidden transition-colors duration-500">
       <Image
         src="/images/earth.jpg"
         alt="Background"
@@ -25,18 +25,18 @@ export default function Account() {
         }`}
       />
 
-      <div className="relative z-20 flex items-center justify-center h-full px-4 mt-[3%]">
-        <div className="max-w-[960px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 items-start gap-8">
+      <div className="relative z-20 flex items-center justify-center min-h-screen px-4 py-12 sm:py-16 md:py-20">
+        <div className="max-w-[960px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-8 md:gap-12">
           <div
-            className={`pt-2 transition-colors duration-500 ${
+            className={`pt-2 transition-colors duration-500 text-center lg:text-left ${
               isDark ? "text-[#B5BAC0]" : "text-[#1A1A1A]"
             }`}
           >
             <h1
               className="font-semibold font-inter mb-4"
               style={{
-                fontSize: generateClamp(28, 58),
-                lineHeight: generateClamp(34, 63),
+                fontSize: generateClamp(22, 48),
+                lineHeight: generateClamp(30, 58),
                 letterSpacing: "-0.02em",
               }}
             >
@@ -46,7 +46,7 @@ export default function Account() {
             <p
               className="leading-relaxed font-inter"
               style={{
-                fontSize: generateClamp(16, 20),
+                fontSize: generateClamp(14, 18),
               }}
             >
               Welcome back! Your data journey continues. Sign in to access your

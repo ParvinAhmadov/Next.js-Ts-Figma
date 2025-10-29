@@ -31,11 +31,11 @@ const ChartBlock: React.FC<ChartBlockProps> = ({
   const isDark = theme === "dark";
   const imgSrc = isDark ? imgDark : imgLight;
 
-  const textColor = isDark ? "text-gray-300" : "text-gray-700";
-  const titleColor = isDark ? "text-white" : "text-gray-900";
+  const textColor = isDark ? "text-gray-300" : "text-[#030712]";
+  const titleColor = isDark ? "text-white" : "text-[#030712]";
   const buttonClasses = isDark
-    ? "bg-[#284068] hover:bg-blue-700 text-white"
-    : "bg-[#030712] hover:bg-blue-600 text-white";
+    ? "bg-[#284068] hover:text-red-500 text-white"
+    : "bg-[#030712] hover:text-red-500 text-white";
 
   return (
     <motion.div
@@ -53,17 +53,19 @@ const ChartBlock: React.FC<ChartBlockProps> = ({
           alt={title}
           width={400}
           height={300}
-          className="mx-auto lg:mx-0 rounded-xl"
+          className="mx-auto lg:mx-0 "
         />
       ) : (
-        <div className="w-[400px] h-[300px] bg-gray-300 dark:bg-gray-700 rounded-xl" />
+        <div className="w-[400px] h-[300px] bg-gray-300 dark:bg-gray-700 " />
       )}
 
       <div className="flex flex-col h-full text-center lg:text-left max-w-[800px]">
         <h3 className={`text-xl lg:text-2xl font-bold mb-4 ${titleColor}`}>
           {title}
         </h3>
-        <p className={`text-sm lg:text-base leading-relaxed ${textColor}`}>
+        <p
+          className={`text-sm lg:text-start lg:text-base leading-relaxed ${textColor}`}
+        >
           {text}
         </p>
 
@@ -71,7 +73,7 @@ const ChartBlock: React.FC<ChartBlockProps> = ({
           <div className="mt-6 flex flex-col items-center lg:items-end">
             <div>
               <button
-                className={`px-10 py-3 flex items-center gap-2 rounded text-sm font-semibold transition-all duration-300 ${buttonClasses}`}
+                className={`px-10 py-3 flex items-center gap-2 rounded text-sm font-semibold transition-all duration-300 cursor-pointer ${buttonClasses}`}
               >
                 {buttonText || "Learn More"}
                 <FaArrowRight />
@@ -79,7 +81,7 @@ const ChartBlock: React.FC<ChartBlockProps> = ({
             </div>
 
             {buttonSubtitle && (
-              <span className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <span className="mt-2 text-xs text-gray-500 dark:text-gray-400 ">
                 {buttonSubtitle}
               </span>
             )}
@@ -126,10 +128,10 @@ const AboutComparisonBlock: React.FC = () => {
   return (
     <section
       className={`w-full py-20 transition-colors duration-700 ${
-        isDark ? "bg-[#09101B] text-white" : "bg-[#F9FAFB] text-gray-900"
+        isDark ? "bg-[#09101B] text-white" : "bg-white text-gray-900"
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-4 flex flex-col gap-24">
+      <div className="max-w-[1440px] px-[4%] mx-auto flex flex-col gap-24">
         {charts.map((chart, i) => (
           <ChartBlock key={i} {...chart} />
         ))}

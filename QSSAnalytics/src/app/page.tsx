@@ -4,8 +4,8 @@ import SectorGrid from "@/components/SectorsCard";
 
 export default function Home() {
   return (
-    < >
-     <InfoSearch/>
+    <>
+      <InfoSearch />
       <SectorGrid />
       <CountryDashboard />
     </>

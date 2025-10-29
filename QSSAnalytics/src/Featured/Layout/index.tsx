@@ -39,7 +39,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
       {!pathname.includes("/account") && <Footer />}
 
-      {/* Burada əlavə edirik */}
       <UpButton />
     </div>
   );

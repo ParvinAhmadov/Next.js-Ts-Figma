@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { TfiAngleUp } from "react-icons/tfi";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/context"; 
+import { useTheme } from "@/context";
 
 const UpButton: React.FC = () => {
   const { theme } = useTheme();

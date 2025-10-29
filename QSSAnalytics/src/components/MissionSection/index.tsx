@@ -14,7 +14,7 @@ export function MissionSection() {
         }}
       />
 
-      <div className="absolute top-[35%] right-[0%] lg:right-[20%]">
+      <div className="absolute top-[35%] right-0 lg:right-[20%]">
         <Image
           src="https://searchartfront-production.up.railway.app/assets/ellipse-a39dd00f.svg"
           alt="Ellipse"
@@ -27,7 +27,7 @@ export function MissionSection() {
 
       <div className="absolute inset-0 bg-black opacity-30 pointer-events-none" />
 
-      <div className="relative z-10 container mx-auto px-6 md:px-20 flex flex-col items-center justify-center ">
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 flex flex-col items-center justify-center ">
         <div className="max-w-[1005px] w-full flex flex-col items-start justify-center">
           <h1
             className="font-bold mb-6 md:mb-8 tracking-tight  text-[#FFFFFF]/50"
